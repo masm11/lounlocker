@@ -42,5 +42,24 @@ public class LoUnlockerPreferenceFragment extends PreferenceFragment {
 		}
 	    });
 	}
+	
+	for (String key: new String[] { "sudo", "decr" }) {
+	    EditTextPreference etp;
+	    etp = (EditTextPreference) findPreference(key);
+	    etp.setSummary(replaceWithAsterisk(etp.getText()));
+	    etp.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
+		@Override
+		public boolean onPreferenceChange(Preference pref, Object val) {
+		    pref.setSummary(replaceWithAsterisk(val.toString()));
+		    return true;
+		}
+	    });
+	}
+    }
+    
+    private String replaceWithAsterisk(String orig) {
+	if (orig == null)
+	    return null;
+	return orig.replaceAll(".", "*");
     }
 }

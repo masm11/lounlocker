@@ -4,26 +4,44 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
   
-  <EditTextPreference
-      android:key="hostname"
-      android:title="@string/hostname"
-      android:summary=""
-      android:dialogTitle="@string/hostname"
-      android:inputType="text"
-      android:defaultValue="localhost" />
-  
-  <EditTextPreference
-      android:key="username"
-      android:title="@string/username"
-      android:summary=""
-      android:dialogTitle="@string/username"
-      android:inputType="text"
-      android:defaultValue="someone" />
-  
-  <jp.ddo.masm11.lounlocker.GenerateKeyPairPreference
-      android:key="gen_keypair"
-      android:title="@string/generate_key_pair"
-      android:summary=""
-      android:defaultValue="init"/>
+  <PreferenceCategory
+      android:title="Server">
+
+    <EditTextPreference
+	android:key="hostname"
+	android:title="@string/hostname"
+	android:summary=""
+	android:dialogTitle="@string/hostname"
+	android:inputType="text"
+	android:defaultValue="localhost" />
+    
+    <EditTextPreference
+	android:key="username"
+	android:title="@string/username"
+	android:summary=""
+	android:dialogTitle="@string/username"
+	android:inputType="text"
+	android:defaultValue="someone" />
+    
+    <jp.ddo.masm11.lounlocker.GenerateKeyPairPreference
+	android:key="gen_keypair"
+	android:title="@string/generate_key_pair"
+	android:summary=""
+	android:defaultValue="init"/>
+    
+  </PreferenceCategory>
+    
+  <PreferenceCategory
+      android:title="Passwords">
+    
+    <jp.ddo.masm11.lounlocker.UnsavedPreference
+	android:key="sudo"
+	android:title="sudo"/>
+    
+    <jp.ddo.masm11.lounlocker.UnsavedPreference
+	android:key="decr"
+	android:title="decrypt"/>
+    
+  </PreferenceCategory>
   
 </PreferenceScreen>
