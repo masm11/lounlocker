@@ -34,11 +34,11 @@
   <PreferenceCategory
       android:title="Passwords">
     
-    <jp.ddo.masm11.lounlocker.UnsavedPreference
+    <EditTextPreference
 	android:key="sudo"
 	android:title="sudo"/>
     
-    <jp.ddo.masm11.lounlocker.UnsavedPreference
+    <EditTextPreference
 	android:key="decr"
 	android:title="decrypt"/>
     
