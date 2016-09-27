@@ -57,7 +57,7 @@ public class LoUnlockerPreferenceFragment extends PreferenceFragment {
 	}
     }
     
-    private String replaceWithAsterisk(String orig) {
+    private static String replaceWithAsterisk(String orig) {
 	if (orig == null)
 	    return null;
 	return orig.replaceAll(".", "*");
