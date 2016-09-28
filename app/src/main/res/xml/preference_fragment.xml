@@ -34,13 +34,15 @@
   <PreferenceCategory
       android:title="Passwords">
     
-    <EditTextPreference
+    <jp.ddo.masm11.lounlocker.UnsavedPreference
 	android:key="sudo"
-	android:title="sudo"/>
+	android:title="sudo"
+	android:inputType="textPassword"/>
     
-    <EditTextPreference
+    <jp.ddo.masm11.lounlocker.UnsavedPreference
 	android:key="decr"
-	android:title="decrypt"/>
+	android:title="decrypt"
+	android:inputType="textPassword"/>
     
   </PreferenceCategory>
   

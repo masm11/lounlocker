@@ -2,7 +2,9 @@ package jp.ddo.masm11.lounlocker;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.app.FragmentManager;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceFragment;
 import android.content.SharedPreferences;
 import android.widget.Button;
 import android.view.View;
@@ -44,8 +46,12 @@ public class MainActivity extends AppCompatActivity {
     }
     
     private void lock() {
-	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-	Log.d("sudo=%s", prefs.getString("sudo", null));
+	FragmentManager fragMan = getFragmentManager();
+	PreferenceFragment prefFrag = (PreferenceFragment) fragMan.findFragmentById(R.id.pref_frag);
+	assert prefFrag != null;
+	UnsavedPreference pref = (UnsavedPreference) prefFrag.findPreference("test");
+	assert pref != null;
+	Log.d("test=%s", pref.getText());
     }
     private void unlock() {
 	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);

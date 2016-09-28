@@ -44,8 +44,8 @@ public class LoUnlockerPreferenceFragment extends PreferenceFragment {
 	}
 	
 	for (String key: new String[] { "sudo", "decr" }) {
-	    EditTextPreference etp;
-	    etp = (EditTextPreference) findPreference(key);
+	    UnsavedPreference etp;
+	    etp = (UnsavedPreference) findPreference(key);
 	    etp.setSummary(replaceWithAsterisk(etp.getText()));
 	    etp.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 		@Override
