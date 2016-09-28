@@ -27,9 +27,6 @@ public class LoUnlockerPreferenceFragment extends PreferenceFragment {
 	super.onCreate(savedInstanceState);
 	addPreferencesFromResource(R.xml.preference_fragment);
 	
-	PreferenceManager manager = getPreferenceManager();
-	PreferenceCategory cat = (PreferenceCategory) manager.findPreference("dirs");
-	
 	for (String key: new String[] { "hostname", "username" }) {
 	    EditTextPreference etp;
 	    etp = (EditTextPreference) findPreference(key);
