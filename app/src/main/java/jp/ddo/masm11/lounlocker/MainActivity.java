@@ -9,8 +9,11 @@ import android.content.SharedPreferences;
 import android.widget.Button;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+import java.io.File;
 
+public class MainActivity extends AppCompatActivity {
+    private Thread thread;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,28 +37,33 @@ public class MainActivity extends AppCompatActivity {
 	});
     }
     
-    @Override
-    protected void onDestroy() {
-	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-	SharedPreferences.Editor editor = prefs.edit();
-	editor.remove("sudo");
-	editor.remove("decr");
-	editor.commit();
-	
-	super.onDestroy();
-    }
-    
-    private void lock() {
+    private Config getConfig() {
 	FragmentManager fragMan = getFragmentManager();
 	PreferenceFragment prefFrag = (PreferenceFragment) fragMan.findFragmentById(R.id.pref_frag);
 	assert prefFrag != null;
-	UnsavedPreference pref = (UnsavedPreference) prefFrag.findPreference("test");
-	assert pref != null;
-	Log.d("test=%s", pref.getText());
+	UnsavedPreference prefSudo = (UnsavedPreference) prefFrag.findPreference("sudo");
+	assert prefSudo != null;
+	UnsavedPreference prefDecr = (UnsavedPreference) prefFrag.findPreference("decr");
+	assert prefDecr != null;
+	
+	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+	String hostname = prefs.getString("hostname", null);
+	String username = prefs.getString("username", null);
+	File privkey = new File(getFilesDir(), "privkey");
+	
+	return new Config(hostname, username, privkey, prefSudo.getText(), prefDecr.getText());
+    }
+    
+    private void lock() {
+	Config config = getConfig();
+	
+	thread = new Thread(new LoUnlockThread(false, config));
+	thread.start();
     }
     private void unlock() {
-	SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-	Log.d("sudo=%s", prefs.getString("sudo", null));
+	Config config = getConfig();
+	
+	thread = new Thread(new LoUnlockThread(true, config));
+	thread.start();
     }
-
 }
